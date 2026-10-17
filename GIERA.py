@@ -30,7 +30,7 @@ def pisz(tekst):
     for litera in tekst:
         wyswietlany_tekst += litera
         placeholder.text(wyswietlany_tekst)
-        time.sleep(0.04)
+        time.sleep(0.02)
     st.session_state.pokazane.append(tekst)
 
 
