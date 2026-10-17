@@ -124,7 +124,7 @@ def gra():
 
             if st.button("Ochroniarz"):
                 st.session_state.ostatnia_wiadomosc = (
-                    "Udaje ci sie pokonać ochroniarza"
+                    "Ochronairz cię nokałtuje\nZgon"
                 )
                 st.rerun()
 
