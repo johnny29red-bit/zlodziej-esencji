@@ -309,5 +309,6 @@ def gra():
             pisz("Dobry wybór"
             "Jak uciekasz?")
         
-        if st.button("NIGGER")
+        if st.button("NIGGER"):
+            pisz("nigger")
 gra()
