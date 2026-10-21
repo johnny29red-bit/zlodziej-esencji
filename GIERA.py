@@ -30,7 +30,7 @@ def pisz(tekst):
     for litera in tekst:
         wyswietlany_tekst += litera
         placeholder.text(wyswietlany_tekst)
-        time.sleep(0.02)
+        time.sleep(0.04)
     st.session_state.pokazane.append(tekst)
 
 
@@ -81,7 +81,7 @@ def gra():
                 st.session_state.ostatnia_wiadomosc = ""
                 st.rerun()
         else:
-            st.write("Co robisz?")
+            st.write("Jak wejdziesz?")
 
             if st.button("Furtka"):
                 st.session_state.etap = "Furtka"
@@ -116,7 +116,7 @@ def gra():
 
         if not st.session_state.ostatnia_wiadomosc:
             pisz("Ładne kulturalne wejście.")
-            pisz("Co robisz dalej?")
+            pisz("Gdzie idziesz dalej?")
 
             if st.button("Schody"):
                 st.session_state.etap = "Schody"
@@ -171,8 +171,8 @@ def gra():
 
             if st.button("Mrożon"):
                 st.session_state.ostatnia_wiadomosc = (
-                    "Honey where is my super suit?\nZamrażasz generała i możesz"
-                    " uciec"
+                    "Niestety nie potrafisz używać swoich mocy i trafiasz w siebie"
+                    "Zamrażasz się\nZgon"
                 )
                 st.rerun()
         else:
@@ -223,7 +223,8 @@ def gra():
 
             if st.button("Drzwi"):
                 st.session_state.ostatnia_wiadomosc = (
-                    "Szarpiesz za klamkę i robisz hałas.\nZgon."
+                    "Szarpiesz za klamkę i robisz hałas."
+                    "Ochroniarze przychodzą i cię  zabijają\nZgon"
                 )
                 st.rerun()
 
@@ -245,6 +246,7 @@ def gra():
         if not st.session_state.ostatnia_wiadomosc:
             pisz("Udaje ci się wejść do biura")
             pisz("Ochroniarze nic nie wiedzą")
+            pisz("Gdzie szukasz fiolki?")
 
             if st.button("Zobacz pod łóżkiem"):
                 st.session_state.ostatnia_wiadomosc = (
@@ -252,10 +254,9 @@ def gra():
                 )
                 st.rerun()
 
-            if st.button("Zobacz w biurku"):
-                st.session_state.ostatnia_wiadomosc = (
-                    "Znajdujesz fiolke!!!\nWygrana\nKoniec gry"
-                )
+            if st.button("W biurku"):
+                st.session_state.etap = "Ucieczka"
+                st.session_state.ostatnia_wiadomosc = ""
                 st.rerun()
 
             if st.button("Zobacz za obrazem"):
@@ -269,6 +270,7 @@ def gra():
                 st.session_state.ostatnia_wiadomosc = (
                     "Próbujesz zgadnąć kod, ale ochroniarze dostaja wiadomość"
                     "Przychodzą i cie zabijają"
+                    "Zgon"
                 )
                 st.rerun()
 
@@ -280,6 +282,32 @@ def gra():
                 st.session_state.pokazano_intro = False
                 st.session_state.ostatnia_wiadomosc = ""
                 st.rerun()
+    
+    elif st.session_state.etap == "Ucieczka":
+        
+        if not st.session_state.ostatnia_wiadomosc:
+            pisz("Udało ci się znaleźć fiolkę"
+            "Przydałoby się teraz uciec"
+            )
+        if st.button("Ucieczka"):
+            st.session_state.etap = "Ucieczken"
+            st.session_state.ostatnia_wiadomosc = ""
+            st.rerun()
 
+        else:
+            pisz(st.session_state.ostatnia_wiadomosc)
 
+            if st.button("Powrót na początek"):
+                st.session_state.etap = "start"
+                st.session_state.pokazano_intro = False
+                st.session_state.ostatnia_wiadomosc = ""
+                st.rerun()
+    
+    elif st.session_state.etap == "Ucieczken":
+
+        if not st.session_state.ostatnia_wiadomosc:
+            pisz("Dobry wybór"
+            "Jak uciekasz?")
+        
+        if st.button("NIGGER")
 gra()
