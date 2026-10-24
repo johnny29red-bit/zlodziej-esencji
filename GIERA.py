@@ -306,8 +306,7 @@ def gra():
     elif st.session_state.etap == "Ucieczken":
 
         if not st.session_state.ostatnia_wiadomosc:
-            pisz("Dobry wybór"
-            "Jak uciekasz?")
+            pisz("Dobry wybór\nJak uciekasz?")
         
         if st.button("Główna brama"):
             st.session_state.etap = "dwor"
@@ -370,7 +369,7 @@ def gra():
                 "Ochroniarze cię łapią\nZgon"
             )
             st.rerun()
-            
+
         else:
             pisz(st.session_state.ostatnia_wiadomosc)
 
