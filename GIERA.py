@@ -282,98 +282,17 @@ def gra():
                 st.session_state.pokazano_intro = False
                 st.session_state.ostatnia_wiadomosc = ""
                 st.rerun()
-    
+
     elif st.session_state.etap == "Ucieczka":
-        
-        if not st.session_state.ostatnia_wiadomosc:
-            pisz("Udało ci się znaleźć fiolkę"
-            "Przydałoby się teraz uciec"
-            )
-        if st.button("Ucieczka"):
-            st.session_state.etap = "Ucieczken"
-            st.session_state.ostatnia_wiadomosc = ""
-            st.rerun()
-            
-            else:
-                pisz(st.session_state.ostatnia_wiadomosc)
-                
-                if st.button("Powrót na początek"):
-                    st.session_state.etap = "start"
-                    st.session_state.pokazano_intro = False
-                    st.session_state.ostatnia_wiadomosc = ""
-                    st.rerun()
-    
-    elif st.session_state.etap == "Ucieczken":
 
         if not st.session_state.ostatnia_wiadomosc:
-            pisz("Dobry wybór\nJak uciekasz?")
-        
-        if st.button("Główna brama"):
-            st.session_state.etap = "dwor"
-            st.session_state.ostatnia_wiadomosc = ""
-            st.rerun()
-        
-        if st.button("Mur"):
-            st.session_state.ostatnia_wiadomosc =(
-            "Nie masz liny, nie przejdziesz przez ten mur"
-            )
-        
-        if st.button("NIGGER"):
-            pisz("NIGEGR")
-            
-            else:
-                pisz(st.session_state.ostatnia_wiadomosc)
-                
-                if st.button("Powrót na początek"):
-                    st.session_state.etap = "start"
-                    st.session_state.pokazano_intro = False
-                    st.session_state.ostatnia_wiadomosc = ""
-                    st.rerun()
-    
-    
-    elif st.session_state.etap == "dwor":
+            pisz("Udało ci się znaleźć fiolkę.")
+            pisz("Przydałoby się teraz uciec.")
 
-        if not st.session_state.ostatnia_wiadomosc:
-
-            pisz("Jesteś poza posesją\nGdzie idziesz?")
-        
-        if st.button("Lewo"):
-            st.session_state.etap = "skok"
-            st.session_state.ostatnia_wiadomosc = ""
-            st.rerun()
-        
-        if st.button("Prawo"):
-            st.session_state.ostatnia_wiadomosc = (
-                "Spotykasz ochronairzy\nZabijają cię\nZgon"
-            )
-            st.rerun()
-
-            else:
-                pisz(st.session_state.ostatnia_wiadomosc)
-                
-                if st.button("Powrót na początek"):
-                    st.session_state.etap = "start"
-                    st.session_state.pokazano_intro = False
-                    st.session_state.ostatnia_wiadomosc = ""
-                    st.rerun()
-    
-    
-    elif st.session_state.etap == "skok":
-        if not st.session_state.ostatnia_wiadomosc:
-            pisz("Dobry wybór\nSkaczesz do wodyczy idziesz brzegiem")
-        
-        if st.button("Skaczesz"):
-            st.session_state.ostatnia_wiadomosc =(
-                "Udaje ci się uciec\nBrawo\nWYGRANA"
-            )
-            st.rerun()
-        
-        if st.button("Brzeg"):
-            st.session_state.ostatnia_wiadomosc = (
-                "Ochroniarze cię łapią\nZgon"
-            )
-            st.rerun()
-
+            if st.button("Ucieczka"):
+                st.session_state.etap = "Ucieczken"
+                st.session_state.ostatnia_wiadomosc = ""
+                st.rerun()
         else:
             pisz(st.session_state.ostatnia_wiadomosc)
 
@@ -382,5 +301,82 @@ def gra():
                 st.session_state.pokazano_intro = False
                 st.session_state.ostatnia_wiadomosc = ""
                 st.rerun()
+
+    elif st.session_state.etap == "Ucieczken":
+
+        if not st.session_state.ostatnia_wiadomosc:
+            pisz("Dobry wybór.")
+            pisz("Jak uciekasz?")
+
+            if st.button("Główna brama"):
+                st.session_state.etap = "dwor"
+                st.session_state.ostatnia_wiadomosc = ""
+                st.rerun()
+
+            if st.button("Mur"):
+                st.session_state.ostatnia_wiadomosc = (
+                    "Nie masz liny, nie przejdziesz przez ten mur.\nZgon"
+                )
+                st.rerun()
+        else:
+            pisz(st.session_state.ostatnia_wiadomosc)
+
+            if st.button("Powrót na początek"):
+                st.session_state.etap = "start"
+                st.session_state.pokazano_intro = False
+                st.session_state.ostatnia_wiadomosc = ""
+                st.rerun()
+
+    elif st.session_state.etap == "dwor":
+
+        if not st.session_state.ostatnia_wiadomosc:
+            pisz("Jesteś poza posesją.")
+            pisz("Gdzie idziesz?")
+
+            if st.button("Lewo"):
+                st.session_state.etap = "skok"
+                st.session_state.ostatnia_wiadomosc = ""
+                st.rerun()
+
+            if st.button("Prawo"):
+                st.session_state.ostatnia_wiadomosc = (
+                    "Spotykasz ochroniarzy\nZabijają cię\nZgon"
+                )
+                st.rerun()
+        else:
+            pisz(st.session_state.ostatnia_wiadomosc)
+
+            if st.button("Powrót na początek"):
+                st.session_state.etap = "start"
+                st.session_state.pokazano_intro = False
+                st.session_state.ostatnia_wiadomosc = ""
+                st.rerun()
+
+    elif st.session_state.etap == "skok":
+
+        if not st.session_state.ostatnia_wiadomosc:
+            pisz("Dobry wybór.")
+            pisz("Skaczesz do wody czy idziesz brzegiem?")
+
+            if st.button("Skaczesz"):
+                st.session_state.ostatnia_wiadomosc = (
+                    "Udaje ci się uciec\nBrawo\nWYGRANA"
+                )
+                st.rerun()
+
+            if st.button("Brzeg"):
+                st.session_state.ostatnia_wiadomosc = (
+                    "Ochroniarze cię łapią\nZgon"
+                )
+                st.rerun()
+        else:
+            pisz(st.session_state.ostatnia_wiadomosc)
+
+            if st.button("Powrót na początek"):
+                st.session_state.etap = "start"
+                st.session_state.pokazano_intro = False
+                st.session_state.ostatnia_wiadomosc = ""
+                st.rerun()
+
 
 gra()
