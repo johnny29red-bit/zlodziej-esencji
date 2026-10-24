@@ -293,6 +293,12 @@ def gra():
                 st.session_state.etap = "Ucieczken"
                 st.session_state.ostatnia_wiadomosc = ""
                 st.rerun()
+                
+            if st.button("Powrót na początek"):
+                st.session_state.etap = "start"
+                st.session_state.pokazano_intro = False
+                st.session_state.ostatnia_wiadomosc = ""
+                st.rerun()
         else:
             pisz(st.session_state.ostatnia_wiadomosc)
 
