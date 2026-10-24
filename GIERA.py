@@ -334,7 +334,7 @@ def gra():
         if not st.session_state.ostatnia_wiadomosc:
             pisz("Jesteś poza posesją\nGdzie idziesz?")
         
-        if st.button("Prawo"):
+        if st.button("Lewo"):
             st.session_state.etap = "skok"
             st.session_state.ostatnia_wiadomosc = ""
             st.rerun()
@@ -378,4 +378,5 @@ def gra():
                 st.session_state.pokazano_intro = False
                 st.session_state.ostatnia_wiadomosc = ""
                 st.rerun()
+
 gra()
