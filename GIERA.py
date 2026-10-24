@@ -323,8 +323,16 @@ def gra():
 
         else:
             pisz(st.session_state.ostatnia_wiadomosc)
+
+            if st.button("Powrót na początek"):
+                st.session_state.etap = "start"
+                st.session_state.pokazano_intro = False
+                st.session_state.ostatnia_wiadomosc = ""
+                st.rerun()
+    
     
     elif st.session_state.etap == "dwor":
+
         if not st.session_state.ostatnia_wiadomosc:
             pisz("Jesteś poza posesją\nGdzie idziesz?")
         
@@ -341,6 +349,13 @@ def gra():
 
         else:
             pisz(st.session_state.ostatnia_wiadomosc)
+
+            if st.button("Powrót na początek"):
+                st.session_state.etap = "start"
+                st.session_state.pokazano_intro = False
+                st.session_state.ostatnia_wiadomosc = ""
+                st.rerun()
+    
     
     elif st.session_state.etap == "skok":
         if not st.session_state.ostatnia_wiadomosc:
