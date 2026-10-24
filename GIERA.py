@@ -293,7 +293,7 @@ def gra():
                 st.session_state.etap = "Ucieczken"
                 st.session_state.ostatnia_wiadomosc = ""
                 st.rerun()
-                
+
             if st.button("Powrót na początek"):
                 st.session_state.etap = "start"
                 st.session_state.pokazano_intro = False
@@ -322,6 +322,20 @@ def gra():
             if st.button("Mur"):
                 st.session_state.ostatnia_wiadomosc = (
                     "Nie masz liny, nie przejdziesz przez ten mur.\nZgon"
+                )
+                st.rerun()
+
+            if st.button("Okno"):
+                st.session_state.ostatnia_wiadomosc = (
+                    "Skaczesz, ale perfumy sie tłuką i szkło przebija twoje ciało"
+                    "\nWykrwawiasz sie\nZgon"
+                )
+                st.rerun()
+                
+            if st.button("Samochód"):
+                st.session_state.ostatnia_wiadomosc = (
+                    "Próbujesz otworzyć auto, ale właczą się alarm"
+                    "\nOchroniarze przychodzą i cię zabijają\nZgon"
                 )
                 st.rerun()
         else:
