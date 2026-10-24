@@ -293,15 +293,15 @@ def gra():
             st.session_state.etap = "Ucieczken"
             st.session_state.ostatnia_wiadomosc = ""
             st.rerun()
-
-        else:
-            pisz(st.session_state.ostatnia_wiadomosc)
-
-            if st.button("Powrót na początek"):
-                st.session_state.etap = "start"
-                st.session_state.pokazano_intro = False
-                st.session_state.ostatnia_wiadomosc = ""
-                st.rerun()
+            
+            else:
+                pisz(st.session_state.ostatnia_wiadomosc)
+                
+                if st.button("Powrót na początek"):
+                    st.session_state.etap = "start"
+                    st.session_state.pokazano_intro = False
+                    st.session_state.ostatnia_wiadomosc = ""
+                    st.rerun()
     
     elif st.session_state.etap == "Ucieczken":
 
@@ -320,20 +320,21 @@ def gra():
         
         if st.button("NIGGER"):
             pisz("NIGEGR")
-
-        else:
-            pisz(st.session_state.ostatnia_wiadomosc)
-
-            if st.button("Powrót na początek"):
-                st.session_state.etap = "start"
-                st.session_state.pokazano_intro = False
-                st.session_state.ostatnia_wiadomosc = ""
-                st.rerun()
+            
+            else:
+                pisz(st.session_state.ostatnia_wiadomosc)
+                
+                if st.button("Powrót na początek"):
+                    st.session_state.etap = "start"
+                    st.session_state.pokazano_intro = False
+                    st.session_state.ostatnia_wiadomosc = ""
+                    st.rerun()
     
     
     elif st.session_state.etap == "dwor":
 
         if not st.session_state.ostatnia_wiadomosc:
+
             pisz("Jesteś poza posesją\nGdzie idziesz?")
         
         if st.button("Lewo"):
@@ -347,14 +348,14 @@ def gra():
             )
             st.rerun()
 
-        else:
-            pisz(st.session_state.ostatnia_wiadomosc)
-
-            if st.button("Powrót na początek"):
-                st.session_state.etap = "start"
-                st.session_state.pokazano_intro = False
-                st.session_state.ostatnia_wiadomosc = ""
-                st.rerun()
+            else:
+                pisz(st.session_state.ostatnia_wiadomosc)
+                
+                if st.button("Powrót na początek"):
+                    st.session_state.etap = "start"
+                    st.session_state.pokazano_intro = False
+                    st.session_state.ostatnia_wiadomosc = ""
+                    st.rerun()
     
     
     elif st.session_state.etap == "skok":
