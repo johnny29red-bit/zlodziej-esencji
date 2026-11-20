@@ -5,7 +5,7 @@ from streamlit_image_coordinates import streamlit_image_coordinates
 
 st.set_page_config(layout="wide")
 
-OBRAZ = Image.open("Mapa.cayo.png")
+OBRAZ = Image.open("Mapa.cayo.png)
 SZEROKOSC_ORYGINALU = OBRAZ.size[0]
 
 st.markdown(
