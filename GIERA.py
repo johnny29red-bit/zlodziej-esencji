@@ -1,5 +1,12 @@
 import time
 import streamlit as st
+from PIL import Image
+from streamlit_image_coordinates import streamlit_image_coordinates
+
+st.set_page_config(layout="wide")
+
+OBRAZ = Image.open("Mapa.cayo.png")
+SZEROKOSC_ORYGINALU = OBRAZ.size[0]
 
 st.markdown(
     """
@@ -17,8 +24,15 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-ma_esencja = False
-Wygrana = False
+
+# Obszary klikalne na mapie w pikselach ORYGINALNEGO obrazka: (x1, y1, x2, y2)
+# UWAGA: to szacunek, trzeba dopasować do Mapa.cayo.png (patrz st.write(klik) niżej)
+OBSZARY = {
+    "1": (165, 165, 255, 240),
+    "2": (590, 170, 690, 250),
+    "3": (350, 340, 490, 450),
+    "4": (570, 620, 680, 710),
+}
 
 
 def pisz(tekst):
@@ -30,8 +44,26 @@ def pisz(tekst):
     for litera in tekst:
         wyswietlany_tekst += litera
         placeholder.text(wyswietlany_tekst)
-        time.sleep(0.03)
+        time.sleep(0.04)
     st.session_state.pokazane.append(tekst)
+
+
+def intro(animuj):
+    """Wprowadzenie. animuj=True -> efekt pisania, False -> od razu."""
+    linie = [
+        "Witaj w grze Złodziej Esencji.",
+        "Jesteś przed posesją Rosyjskiego Mafiozy.",
+        "Perfum znajduje się w jego biurze na górze wieży.",
+        "Aby wygrać w tej grze, musisz ukraść najlepsze perfumy na świecie.",
+        "Powodzenia!",
+    ]
+    st.write("-----------------------------------------------------------------")
+    for linia in linie:
+        if animuj:
+            pisz(linia)
+        else:
+            st.text(linia)
+    st.write("-----------------------------------------------------------------")
 
 
 if "etap" not in st.session_state:
@@ -44,33 +76,19 @@ if "pokazane" not in st.session_state:
     st.session_state.pokazane = []
 if "ostatni_etap" not in st.session_state:
     st.session_state.ostatni_etap = "start"
+if "tryb" not in st.session_state:
+    st.session_state.tryb = None
+if "ostatni_klik" not in st.session_state:
+    st.session_state.ostatni_klik = None
+
+# Reset animacji przy zmianie etapu (musi być PRZED rysowaniem kolumn)
+if st.session_state.etap != st.session_state.ostatni_etap:
+    st.session_state.pokazane = []
+    st.session_state.ostatni_etap = st.session_state.etap
 
 
 def gra():
-    global Wygrana, ma_esencja
-
-    if st.session_state.etap != st.session_state.ostatni_etap:
-        st.session_state.pokazane = []
-        st.session_state.ostatni_etap = st.session_state.etap
-
     if st.session_state.etap == "start":
-
-        if not st.session_state.pokazano_intro:
-            st.write(
-                "-----------------------------------------------------------------"
-            )
-            pisz("Witaj w grze Złodziej Esencji.")
-            pisz("Jesteś przed posesją Rosyjskiego Mafiozy.")
-            pisz("Perfum znajduje się w jego biurze na górze wieży.")
-            pisz(
-                "Aby wygrać w tej grze, musisz ukraść najlepsze perfumy na"
-                " świecie."
-            )
-            pisz("Powodzenia!")
-            st.write(
-                "-----------------------------------------------------------------"
-            )
-            st.session_state.pokazano_intro = True
 
         if st.session_state.ostatnia_wiadomosc:
             pisz(st.session_state.ostatnia_wiadomosc)
@@ -171,7 +189,7 @@ def gra():
 
             if st.button("Mrożon"):
                 st.session_state.ostatnia_wiadomosc = (
-                    "Niestety nie potrafisz używać swoich mocy i trafiasz w siebie"
+                    "Niestety nie potrafisz używać swoich mocy i trafiasz w siebie\n"
                     "Zamrażasz się\nZgon"
                 )
                 st.rerun()
@@ -223,8 +241,8 @@ def gra():
 
             if st.button("Drzwi"):
                 st.session_state.ostatnia_wiadomosc = (
-                    "Szarpiesz za klamkę i robisz hałas."
-                    "Ochroniarze przychodzą i cię  zabijają\nZgon"
+                    "Szarpiesz za klamkę i robisz hałas.\n"
+                    "Ochroniarze przychodzą i cię zabijają\nZgon"
                 )
                 st.rerun()
 
@@ -261,15 +279,15 @@ def gra():
 
             if st.button("Zobacz za obrazem"):
                 st.session_state.ostatnia_wiadomosc = (
-                    "Odsuwasz obraz\nOn spada na podłoge i robi wielki hałas"
+                    "Odsuwasz obraz\nOn spada na podłoge i robi wielki hałas\n"
                     "Ochroniarze przychodzą i cie zabijają\nZgon"
                 )
                 st.rerun()
 
             if st.button("Zobacz w sejfie"):
                 st.session_state.ostatnia_wiadomosc = (
-                    "Próbujesz zgadnąć kod, ale ochroniarze dostaja wiadomość"
-                    "Przychodzą i cie zabijają"
+                    "Próbujesz zgadnąć kod, ale ochroniarze dostaja wiadomość\n"
+                    "Przychodzą i cie zabijają\n"
                     "Zgon"
                 )
                 st.rerun()
@@ -331,10 +349,10 @@ def gra():
                     "\nWykrwawiasz sie\nZgon"
                 )
                 st.rerun()
-                
+
             if st.button("Samochód"):
                 st.session_state.ostatnia_wiadomosc = (
-                    "Próbujesz otworzyć auto, ale właczą się alarm"
+                    "Próbujesz otworzyć auto, ale włącza się alarm"
                     "\nOchroniarze przychodzą i cię zabijają\nZgon"
                 )
                 st.rerun()
@@ -399,4 +417,32 @@ def gra():
                 st.rerun()
 
 
-gra()
+
+lewa, prawa = st.columns([1, 1])
+
+with lewa:
+    
+    if st.session_state.etap == "start":
+        intro(animuj=True)
+    elif st.session_state.ostatnia_wiadomosc:
+        intro(animuj=False)
+
+    klik = streamlit_image_coordinates(OBRAZ, width=600, key="mapa")
+
+    if klik and klik != st.session_state.ostatni_klik:
+        st.session_state.ostatni_klik = klik
+        skala = SZEROKOSC_ORYGINALU / klik["width"]
+        x, y = klik["x"] * skala, klik["y"] * skala
+
+        for numer, (x1, y1, x2, y2) in OBSZARY.items():
+            if x1 <= x <= x2 and y1 <= y <= y2:
+                st.session_state.tryb = numer
+                st.rerun()
+
+        
+        st.write(klik)
+
+with prawa:
+    if st.session_state.tryb:
+        st.info(f"Wybrany tryb: {st.session_state.tryb}")
+    gra()
